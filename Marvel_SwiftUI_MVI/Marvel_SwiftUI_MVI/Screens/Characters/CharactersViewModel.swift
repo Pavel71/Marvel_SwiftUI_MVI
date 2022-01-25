@@ -43,10 +43,10 @@ final class CharactersViewModel: ObservableObject {
                     print("Reset")
 //                    self.state = CharactersState(isLoading: false, isEmpty: true)
 
-                    self.steps.send(.openDetails)
+//                    self.steps.send(.openDetails)
                     
 //                    self.alert = .init(title: "Some Title", message: "Some Message")
-//                    self.alerts.send(.init(title: "Some Title", message: "Some Message"))
+
 
                 } else {
                     print("make api request here",str)
@@ -70,6 +70,20 @@ extension CharactersViewModel {
             // lets use here combine framework to implemetn easy debounce
             print("Str from View",str)
             quyerThroughSubject.send(str)
+            
+        case .loadContent:
+            state = self.state.change(path: \.isLoading, to: true)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                self.state = self.state
+                    .change(path: \.isLoading, to: false)
+                    .change(path: \.isEmpty, to: true)
+                
+            }
+            
+        case .pushScreen:
+            self.steps.send(.openDetails)
+        case.showAlertAction:
+            self.alert = .init(title: "Some Title", message: "Some Message")
         }
     }
 }

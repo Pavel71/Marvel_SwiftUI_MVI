@@ -13,13 +13,15 @@ protocol ViewModelStatefull {
     associatedtype ViewState
     associatedtype ViewRoute
     
-    // output data
+    
+    // @Published
     var state: ViewState { get set}
     
     // navigation steps
     var steps: PassthroughSubject<ViewRoute, Never> { get set }
     
-    // show alert
+   
+    // @Published
     var alert: AlertInfo? { get set }
     
     // input actions

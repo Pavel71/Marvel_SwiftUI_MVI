@@ -14,7 +14,6 @@ struct CharactersScreenView: View {
     @ObservedObject var viewModel: CharactersViewModel
     @StateObject var navigation =  Navigation(isRoot: true)
     
-    @State private var alertData: AlertInfo? = nil
     
     var body: some View {
         
@@ -37,6 +36,22 @@ struct CharactersScreenView: View {
                 if (viewModel.state.data.list.isEmpty == false) {
                     Text("Here we have data")
                 }
+                
+                VStack {
+                  
+                    
+                    Button(action: {viewModel.setInputAction(.loadContent)}) {
+                        Text("Show Content")
+                    }
+                    
+                    Button(action: {viewModel.setInputAction(.showAlertAction)}) {
+                       Text("Show Alert")
+                    }
+                    
+                    Button(action: {viewModel.setInputAction(.pushScreen)}) {
+                        Text("Push Screen")
+                    }
+                }
                     
                 
             }
@@ -47,7 +62,6 @@ struct CharactersScreenView: View {
                 switch step {
                 case .openDetails:
 
-                    
                     navigation.present(.page, destination: {
                         CharacterDetalsScreenView()
                     }, onDismiss: {
@@ -60,11 +74,6 @@ struct CharactersScreenView: View {
                 Alert(title: Text(alert.title),
                       message: Text(alert.message))
             }
-//            .alert(item: $alertData) { alertData in
-//                Alert(title: Text(alertData.title),
-//                      message: Text(alertData.message))
-//            }
-            
             
             
         }
@@ -72,18 +81,6 @@ struct CharactersScreenView: View {
     }
 }
 
-
-//private struct CharacterListView: View {
-//    
-//    @EnvironmentObject var viewModel: CharactersViewModel
-//    
-//    
-//    var body: some View {
-//        
-//        
-//        
-//    }
-//}
 
 private struct SearchBarView: View {
     

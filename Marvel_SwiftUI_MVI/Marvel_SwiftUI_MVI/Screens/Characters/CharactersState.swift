@@ -9,12 +9,12 @@ import Foundation
 
 
 struct CharactersState: ViewStateable {
-    
+
     
     var isLoading: Bool = false
     var isEmpty: Bool = false
     var data = CharactersModel()
-    var errorData = AlertInfo(title: "", message: "")
+    
 }
 
 

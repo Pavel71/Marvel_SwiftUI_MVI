@@ -10,4 +10,7 @@ import SwiftUI
 
 enum CharacterAction: InputActionable {
     case query(str: String)
+    case showAlertAction
+    case pushScreen
+    case loadContent
 }

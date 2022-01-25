@@ -8,22 +8,24 @@
 import Foundation
 
 
-protocol ViewStateable {
+protocol ViewStateable: Changeable {
     associatedtype DataStateble
     
     var isLoading: Bool { get set }
     var isEmpty: Bool { get set }
     var data: DataStateble { get set }
-    var errorData : AlertInfo { get set }
     
 }
 
 protocol DataStateble {}
 
+protocol Changeable {}
 
-struct AlertInfo: Identifiable {
-    var id = UUID()
-    var title: String = ""
-    var message: String = ""
-    var code: Int? = nil
+extension Changeable {
+    func change<T>(path: WritableKeyPath<Self, T>, to value: T) -> Self {
+        var clone = self
+        clone[keyPath: path] = value
+        return clone
+    }
 }
+
