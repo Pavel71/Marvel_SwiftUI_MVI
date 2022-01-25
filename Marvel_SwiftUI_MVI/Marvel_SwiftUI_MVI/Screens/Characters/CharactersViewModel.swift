@@ -9,6 +9,7 @@ import SwiftUI
 import Combine
 
 
+
 final class CharactersViewModel: ObservableObject {
     
 //     need to store any published
@@ -25,7 +26,8 @@ final class CharactersViewModel: ObservableObject {
     @Published var state = CharactersState()
     
     // Steps Route
-    var steps = PassthroughSubject<CharactersRoute, Never>()
+    private var _steps = PassthroughSubject<CharactersRoute, Never>()
+    lazy var steps = _steps.eraseToAnyPublisher()
     
     // Alert Info
     @Published var alert: AlertInfo? = nil
@@ -33,6 +35,7 @@ final class CharactersViewModel: ObservableObject {
     
     
     init() {
+        
         quyerThroughSubject
             .eraseToAnyPublisher()
             .removeDuplicates()
@@ -59,13 +62,14 @@ final class CharactersViewModel: ObservableObject {
 }
 
 
-
+// MARK: - Set input Actions
 extension CharactersViewModel {
   
     
     func setInputAction(_ action: CharacterAction) {
         
         switch (action) {
+            
         case .query(let str):
             // lets use here combine framework to implemetn easy debounce
             print("Str from View",str)
@@ -76,14 +80,19 @@ extension CharactersViewModel {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                 self.state = self.state
                     .change(path: \.isLoading, to: false)
-                    .change(path: \.isEmpty, to: true)
-                
+                    .change(path: \.data, to: .init(list: Array(0...100)))
+                    .change(path: \.isEmpty, to: false)
+                    
             }
             
         case .pushScreen:
-            self.steps.send(.openDetails)
+            self._steps.send(.openDetails)
+            
         case.showAlertAction:
             self.alert = .init(title: "Some Title", message: "Some Message")
+            
+        case .showEmpty:
+            self.state = self.state.change(path: \.isEmpty, to: true)
         }
     }
 }

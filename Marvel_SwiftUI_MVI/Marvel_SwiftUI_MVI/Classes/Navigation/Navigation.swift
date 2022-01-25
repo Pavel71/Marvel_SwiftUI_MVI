@@ -2,8 +2,7 @@
 //  Navigation.swift
 //  Dot
 //
-//  Created by Alex Nagy on 09.08.2021.
-//
+
 
 import SwiftUI
 import Combine
@@ -16,7 +15,6 @@ public class Navigation: ObservableObject {
     public init(isRoot: Bool = false) {
         self.isRoot = isRoot
     }
-    
     
     
     @Published public var isPushed = false
@@ -57,6 +55,7 @@ public class Navigation: ObservableObject {
     // I stay this logic here and implement it later
     // 1. need implement here pop to screen in stack
     // 2. need implement here pop to root
+    // 3. need to use locla storage to complete stack logic here
     
     
 }

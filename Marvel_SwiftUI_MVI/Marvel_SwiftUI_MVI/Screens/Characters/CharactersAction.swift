@@ -13,4 +13,5 @@ enum CharacterAction: InputActionable {
     case showAlertAction
     case pushScreen
     case loadContent
+    case showEmpty
 }

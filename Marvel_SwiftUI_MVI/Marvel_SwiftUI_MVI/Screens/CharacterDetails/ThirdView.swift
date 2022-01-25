@@ -13,29 +13,32 @@ struct ThirdView: View {
     
     var body: some View {
         ZStack {
-            Color.yellow
+            Color.yellow.ignoresSafeArea()
             
             VStack {
                 Button(action: {
-//                    navigation.selection = nil
                 }) {
                     Text("pop to root")
-//                    navigation
-                    // need to make here pop to root
-                    
                 }
                 
                 Button(action: {
-//                    self.presentationMode.wrappedValue.dismiss()
-//                    navigation.selection = "Details"
-                    // need to make here dissmis
+
                     navigation.pop()
                 }) {
                     Text("pop Previos")
                 }
+                
+                Button(action: {
+                    navigation.present(.fullScreenCover, destination: {
+                        ThirdView()
+                    })
+                }) {
+                    Text("Push new one Previos")
+                }
             }
            
         }.navigationBarHidden(true)
+            
         .uses(navigation)
     }
 }

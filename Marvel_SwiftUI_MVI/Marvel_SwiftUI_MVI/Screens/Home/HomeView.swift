@@ -9,7 +9,9 @@ import SwiftUI
 
 struct HomeView: View {
     
-    
+    init() {
+            UITabBar.appearance().backgroundColor = UIColor.lightGray
+        }
     
     var body: some View {
         TabView {

@@ -34,11 +34,21 @@ struct CharactersScreenView: View {
                 // show data if we have dat
                 
                 if (viewModel.state.data.list.isEmpty == false) {
-                    Text("Here we have data")
+                    
+                    ForEach(viewModel.state.data.list, id: \.self) { item in
+                        Text("Number data \(item)")
+                        
+                    }
+                    
                 }
                 
-                VStack {
-                  
+                Spacer(minLength: 100)
+                
+                VStack(spacing: 20) {
+                    
+                    Button(action: {viewModel.setInputAction(.showEmpty)}) {
+                        Text("Show Empty")
+                    }
                     
                     Button(action: {viewModel.setInputAction(.loadContent)}) {
                         Text("Show Content")
@@ -55,6 +65,7 @@ struct CharactersScreenView: View {
                     
                 
             }
+            .showTabBar()
             .uses(navigation)
             .navigationTitle("Marvel")
             .onReceive(viewModel.steps) { step in
@@ -70,6 +81,7 @@ struct CharactersScreenView: View {
 
                 }
             }
+            
             .alert(item: $viewModel.alert) { alert in
                 Alert(title: Text(alert.title),
                       message: Text(alert.message))

@@ -18,7 +18,7 @@ struct CharacterDetalsScreenView: View {
        
             
             ZStack {
-                Color.purple
+                Color.purple.ignoresSafeArea()
                 VStack {
                     Button(action: {
                         navigation.pop()
@@ -35,10 +35,24 @@ struct CharacterDetalsScreenView: View {
                         })
     //                    navigation.selection = "Third"
                     }) {
-                        Text("Go to Third")
+                        Text("Push to Third")
+                    }
+                    
+                    Button(action: {
+                        navigation.present(.sheet, destination: {
+                            ThirdView()
+                        }, onDismiss: {
+                            print("Dissmiss Third")
+                        })
+    //                    navigation.selection = "Third"
+                    }) {
+                        Text("Present to Third")
                     }
                 }
+                .hiddenTabBar()
                 .navigationTitle("Details")
+                .ignoresSafeArea()
+                
                .uses(navigation)
             
 //            NavigationLink(destination: ThirdView(), tag: "Third", selection: $navigation.selection) { EmptyView() }

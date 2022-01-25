@@ -2,8 +2,7 @@
 //  NavigationViewModifier.swift
 //  Dot
 //
-//  Created by Alex Nagy on 09.08.2021.
-//
+
 
 import SwiftUI
 import Combine
@@ -50,14 +49,6 @@ public struct NavigationViewModifier: ViewModifier {
                         self.presentationMode.wrappedValue.dismiss()
                 }
             }
-//            .onReceive(isPushRecieved) { isPush in
-//                
-//                if (isPush) {
-//                    // if we want tp work with root
-//                    navigation.isPushed = false
-//                }
-//            }
-            
             
             .sheet(isPresented: $navigation.isPresented, onDismiss: navigation.onDismiss) {
                 navigation.destination
