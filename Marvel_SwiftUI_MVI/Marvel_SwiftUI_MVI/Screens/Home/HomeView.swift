@@ -1,0 +1,35 @@
+//
+//  ContentView.swift
+//  Marvel_SwiftUI_MVI
+//
+//  Created by Павел Мишагин on 24.01.2022.
+//
+
+import SwiftUI
+
+struct HomeView: View {
+    
+    
+    
+    var body: some View {
+        TabView {
+            CharactersScreenView(viewModel: CharactersViewModel())
+                .tabItem {
+                    Image(systemName: "person.3.fill")
+                    Text("characters")
+                }
+            
+            Text("Another Tab")
+                .tabItem {
+                    Image(systemName: "book.fill")
+                    Text("books")
+                }
+        }
+    }
+}
+
+struct HomeView_Previews: PreviewProvider {
+    static var previews: some View {
+        HomeView()
+    }
+}

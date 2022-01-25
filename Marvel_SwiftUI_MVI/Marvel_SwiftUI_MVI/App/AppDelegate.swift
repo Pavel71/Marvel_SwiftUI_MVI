@@ -25,10 +25,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 @main
 struct MarvelApp: App {
   @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    
   
   var body: some Scene {
     WindowGroup {
-      ContentView()
+        HomeView()
     }
   }
 }
