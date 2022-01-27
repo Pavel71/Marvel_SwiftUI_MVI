@@ -12,7 +12,7 @@ import SDWebImageSwiftUI
 struct CharactersScreenView: View {
     
     @ObservedObject var viewModel =  ViewModel()
-    @StateObject var navigation =  Navigation(isRoot: true)
+    @StateObject var navigation =  Navigation()
     
     
     var body: some View {
@@ -74,7 +74,7 @@ struct CharactersScreenView: View {
                 case .openDetails:
 
                     navigation.present(.page, destination: {
-                        CharacterDetalsScreenView()
+                        CharacterDetalsScreenView().environmentObject(navigation)
                     }, onDismiss: {
                         print("Dissmis")
                     })

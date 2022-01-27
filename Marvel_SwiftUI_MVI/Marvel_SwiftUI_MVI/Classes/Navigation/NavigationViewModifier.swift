@@ -12,7 +12,7 @@ public struct NavigationViewModifier: ViewModifier {
     
     @ObservedObject public var navigation: Navigation
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    
+    @State var nav: String?
     
     
     private var isPopBackRecieved: AnyPublisher<Bool, Never> {
@@ -33,8 +33,8 @@ public struct NavigationViewModifier: ViewModifier {
                         .onDisappear {
                             navigation.onDismiss?()
                         },
-//                    tag: "1",
-//                    selection: "1",
+//                    tag: navigation.isRoot ? "Root" : "",
+//                    selection: $nav,
                     isActive: $navigation.isPushed,
                    
                     label: {

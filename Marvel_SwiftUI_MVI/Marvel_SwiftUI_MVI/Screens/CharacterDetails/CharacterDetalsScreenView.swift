@@ -11,6 +11,7 @@ struct CharacterDetalsScreenView: View {
     
     @StateObject var navigation = Navigation()
 //    EnvironmentObject
+    @EnvironmentObject var rootNav: Navigation
     
     
     var body: some View {
@@ -21,7 +22,10 @@ struct CharacterDetalsScreenView: View {
                 Color.purple.ignoresSafeArea()
                 VStack {
                     Button(action: {
-                        navigation.pop()
+//                        navigation.pop()
+                        // if need move to root
+                        print("Button handling")
+                        rootNav.isPushed = false
     //                    navigation.selection = "Third"
                     }) {
                         Text("Go to Back")
@@ -29,7 +33,7 @@ struct CharacterDetalsScreenView: View {
                     
                     Button(action: {
                         navigation.present(.page, destination: {
-                            ThirdView()
+                            ThirdView().environmentObject(rootNav)
                         }, onDismiss: {
                             print("Dissmiss Third")
                         })
@@ -40,7 +44,7 @@ struct CharacterDetalsScreenView: View {
                     
                     Button(action: {
                         navigation.present(.sheet, destination: {
-                            ThirdView()
+                            ThirdView().environmentObject(rootNav)
                         }, onDismiss: {
                             print("Dissmiss Third")
                         })

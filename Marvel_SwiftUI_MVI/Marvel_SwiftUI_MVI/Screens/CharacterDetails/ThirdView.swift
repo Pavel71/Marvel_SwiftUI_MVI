@@ -10,13 +10,17 @@ import SwiftUI
 struct ThirdView: View {
     
     @StateObject var navigation: Navigation = Navigation()
-    
+    @EnvironmentObject var rootNav: Navigation
     var body: some View {
         ZStack {
             Color.yellow.ignoresSafeArea()
             
             VStack {
                 Button(action: {
+                    
+                    rootNav.popToRoot()
+                    // dissmiss presentation
+                    navigation.pop()
                 }) {
                     Text("pop to root")
                 }

@@ -10,12 +10,6 @@ import Combine
 
 public class Navigation: ObservableObject {
     
-    @Published var isRoot: Bool
-    
-    public init(isRoot: Bool = false) {
-        self.isRoot = isRoot
-    }
-    
     
     @Published public var isPushed = false
     @Published public var isPresented = false
@@ -30,7 +24,6 @@ public class Navigation: ObservableObject {
             destination()
         )
         
-        print("IS Root",isRoot)
         switch type {
         case .page:
             self.onDismiss = onDismiss
@@ -50,12 +43,7 @@ public class Navigation: ObservableObject {
     }
     
     public func popToRoot() {
-        isPopToRoot = true
-    }
-    // I stay this logic here and implement it later
-    // 1. need implement here pop to screen in stack
-    // 2. need implement here pop to root
-    // 3. need to use locla storage to complete stack logic here
-    
+        isPushed = false
+    }    
     
 }
