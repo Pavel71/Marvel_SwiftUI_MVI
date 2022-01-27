@@ -8,7 +8,10 @@
 import Foundation
 
 extension CharactersScreenView {
+    
     enum Route: ViewRouteable {
         case openDetails
+        case openSome
     }
+    
 }

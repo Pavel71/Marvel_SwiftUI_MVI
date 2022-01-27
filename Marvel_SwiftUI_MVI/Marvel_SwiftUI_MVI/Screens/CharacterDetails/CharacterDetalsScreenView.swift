@@ -19,14 +19,15 @@ struct CharacterDetalsScreenView: View {
        
             
             ZStack {
-                Color.purple.ignoresSafeArea()
-                VStack {
+                Color.gray.ignoresSafeArea()
+                VStack(spacing: 50) {
                     Button(action: {
-//                        navigation.pop()
+                        navigation.pop()
                         // if need move to root
                         print("Button handling")
-                        rootNav.isPushed = false
-    //                    navigation.selection = "Third"
+                        // also works
+//                        rootNav.isPushed = false
+    
                     }) {
                         Text("Go to Back")
                     }
@@ -37,18 +38,16 @@ struct CharacterDetalsScreenView: View {
                         }, onDismiss: {
                             print("Dissmiss Third")
                         })
-    //                    navigation.selection = "Third"
                     }) {
                         Text("Push to Third")
                     }
                     
                     Button(action: {
                         navigation.present(.sheet, destination: {
-                            ThirdView().environmentObject(rootNav)
+                            ThirdView(isPresentationStyle: true).environmentObject(rootNav)
                         }, onDismiss: {
                             print("Dissmiss Third")
                         })
-    //                    navigation.selection = "Third"
                     }) {
                         Text("Present to Third")
                     }
@@ -59,7 +58,6 @@ struct CharacterDetalsScreenView: View {
                 
                .uses(navigation)
             
-//            NavigationLink(destination: ThirdView(), tag: "Third", selection: $navigation.selection) { EmptyView() }
         }
         
         

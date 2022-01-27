@@ -45,9 +45,16 @@ struct MarvelApp: App {
         initSomeServicesWIthServiceLocator()
     }
 
+    
+   // Appstorage - userdefault - flag
+    
   var body: some Scene {
+      
+      
     WindowGroup {
+        
         HomeView()
+         
     }
       // here we can chekc scene chaged
   }

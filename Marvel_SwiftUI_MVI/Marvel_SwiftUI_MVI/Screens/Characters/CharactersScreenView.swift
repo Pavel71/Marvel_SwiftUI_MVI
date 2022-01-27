@@ -12,8 +12,16 @@ import SDWebImageSwiftUI
 struct CharactersScreenView: View {
     
     @ObservedObject var viewModel =  ViewModel()
-    @StateObject var navigation =  Navigation()
     
+    @StateObject var rootNavigation = Navigation()
+    
+    struct Person {
+        var id = UUID().uuidString
+    }
+    var persons: [Person] = [
+        .init(),
+        .init()
+    ]
     
     var body: some View {
         
@@ -39,6 +47,8 @@ struct CharactersScreenView: View {
                         Text("Number data \(item)")
                         
                     }
+                    
+                    
                     
                 }
                 
@@ -66,18 +76,22 @@ struct CharactersScreenView: View {
                 
             }
             .showTabBar()
-            .uses(navigation)
+            .uses(rootNavigation)
             .navigationTitle("Marvel")
             .onReceive(viewModel.steps) { step in
                 
                 switch step {
                 case .openDetails:
 
-                    navigation.present(.page, destination: {
-                        CharacterDetalsScreenView().environmentObject(navigation)
+                    rootNavigation.present(.page, destination: {
+                        CharacterDetalsScreenView().environmentObject(rootNavigation)
                     }, onDismiss: {
                         print("Dissmis")
                     })
+                    
+                    
+                case .openSome:
+                    print("open SOme")
 
                 }
             }
@@ -100,6 +114,7 @@ private struct SearchBarView: View {
     var typeAction: (CharactersScreenView.ViewAction) -> Void
     
     var body: some View {
+        
         VStack(spacing: 15) {
             
             HStack(spacing: 10) {

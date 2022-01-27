@@ -8,12 +8,16 @@
 import Foundation
 
 extension CharactersScreenView {
+    
+    
     struct ViewState: ViewStateable {
         
-        
         var isLoading: Bool = false
+        
         var isEmpty: Bool = false
+        
         var data = CharactersModel()
+        
         
     }
 }

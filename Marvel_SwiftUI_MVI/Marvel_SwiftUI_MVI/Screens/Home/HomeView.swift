@@ -14,7 +14,9 @@ struct HomeView: View {
         }
     
     var body: some View {
+        
         TabView {
+
             CharactersScreenView()
                 .tabItem {
                     Image(systemName: "person.3.fill")

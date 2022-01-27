@@ -10,17 +10,15 @@ import Combine
 
 
 
+
 extension CharactersScreenView {
     
     
     final class ViewModel: ObservableObject {
         
         
-        
         //     need to store any published
         private var cancellable: Set<AnyCancellable> =  []
-        
-        
         
         // need to connect with published and use debounce
         var quyerThroughSubject = PassthroughSubject<String, Never>()
@@ -36,6 +34,10 @@ extension CharactersScreenView {
         
         // Alert Info
         @Published var alert: AlertInfo? = nil
+        
+        
+        
+        
         
         
         // use Service locator here if needed some services

@@ -8,12 +8,16 @@
 import SwiftUI
 
 extension CharactersScreenView {
+    
+    
     enum ViewAction: InputActionable {
+        
         case query(str: String)
         case showAlertAction
         case pushScreen
         case loadContent
         case showEmpty
+        
     }
 }
 
