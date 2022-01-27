@@ -7,7 +7,8 @@
 
 import Foundation
 
-
-enum CharactersRoute: ViewRouteable {
-    case openDetails
+extension CharactersScreenView {
+    enum Route: ViewRouteable {
+        case openDetails
+    }
 }

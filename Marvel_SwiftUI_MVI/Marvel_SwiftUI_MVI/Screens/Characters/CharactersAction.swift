@@ -7,11 +7,13 @@
 
 import SwiftUI
 
-
-enum CharacterAction: InputActionable {
-    case query(str: String)
-    case showAlertAction
-    case pushScreen
-    case loadContent
-    case showEmpty
+extension CharactersScreenView {
+    enum ViewAction: InputActionable {
+        case query(str: String)
+        case showAlertAction
+        case pushScreen
+        case loadContent
+        case showEmpty
+    }
 }
+

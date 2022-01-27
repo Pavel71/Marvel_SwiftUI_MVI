@@ -15,7 +15,7 @@ struct HomeView: View {
     
     var body: some View {
         TabView {
-            CharactersScreenView(viewModel: CharactersViewModel())
+            CharactersScreenView()
                 .tabItem {
                     Image(systemName: "person.3.fill")
                     Text("characters")

@@ -8,8 +8,12 @@
 import Foundation
 
 
-final class HomeViewModel: ObservableObject {
-    
-    
-    
+extension HomeView {
+    final class HomeViewModel: ObservableObject {
+        
+        
+        
+    }
 }
+
+

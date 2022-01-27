@@ -10,63 +10,73 @@ import Combine
 
 
 
-final class CharactersViewModel: ObservableObject {
-    
-//     need to store any published
-    private var cancellable: Set<AnyCancellable> =  []
-
-
-
-    // need to connect with published and use debounce
-    var quyerThroughSubject = PassthroughSubject<String, Never>()
-
-
-    // OutPut Data
-
-    @Published var state = CharactersState()
-    
-    // Steps Route
-    private var _steps = PassthroughSubject<CharactersRoute, Never>()
-    lazy var steps = _steps.eraseToAnyPublisher()
-    
-    // Alert Info
-    @Published var alert: AlertInfo? = nil
+extension CharactersScreenView {
     
     
-    
-    init() {
+    final class ViewModel: ObservableObject {
         
-        quyerThroughSubject
-            .eraseToAnyPublisher()
-            .removeDuplicates()
-            .debounce(for: 0.6, scheduler: RunLoop.main)
-            .sink(receiveValue: { str in
-
-                if str == "" {
-                    print("Reset")
-//                    self.state = CharactersState(isLoading: false, isEmpty: true)
-
-//                    self.steps.send(.openDetails)
+        
+        
+        //     need to store any published
+        private var cancellable: Set<AnyCancellable> =  []
+        
+        
+        
+        // need to connect with published and use debounce
+        var quyerThroughSubject = PassthroughSubject<String, Never>()
+        
+        
+        // OutPut Data
+        
+        @Published var state = ViewState()
+        
+        // Steps Route
+        internal var _steps = PassthroughSubject<Route, Never>()
+        lazy var steps = _steps.eraseToAnyPublisher()
+        
+        // Alert Info
+        @Published var alert: AlertInfo? = nil
+        
+        
+        // use Service locator here if needed some services
+        init() {
+            
+            quyerThroughSubject
+                .eraseToAnyPublisher()
+                .removeDuplicates()
+                .debounce(for: 0.6, scheduler: RunLoop.main)
+                .sink(receiveValue: { str in
                     
-//                    self.alert = .init(title: "Some Title", message: "Some Message")
-
-
-                } else {
-                    print("make api request here",str)
-                    self.state = CharactersState(isLoading: false)
-                }
-
-            }).store(in: &cancellable)
+                    if str == "" {
+                        print("Reset")
+                        //                    self.state = CharactersState(isLoading: false, isEmpty: true)
+                        
+                        //                    self.steps.send(.openDetails)
+                        
+                        //                    self.alert = .init(title: "Some Title", message: "Some Message")
+                        
+                        
+                    } else {
+                        print("make api request here",str)
+                        self.state = ViewState(isLoading: false)
+                    }
+                    
+                }).store(in: &cancellable)
+        }
+        
     }
-    
 }
 
 
+
 // MARK: - Set input Actions
-extension CharactersViewModel {
-  
+extension CharactersScreenView.ViewModel: ViewModelStatefull {
     
-    func setInputAction(_ action: CharacterAction) {
+    typealias ViewState = CharactersScreenView.ViewState
+    typealias InputAction = CharactersScreenView.ViewAction
+    
+    
+    func setInputAction(_ action: InputAction) {
         
         switch (action) {
             
@@ -76,13 +86,20 @@ extension CharactersViewModel {
             quyerThroughSubject.send(str)
             
         case .loadContent:
-            state = self.state.change(path: \.isLoading, to: true)
+            withAnimation {
+                state = self.state.change(path: \.isLoading, to: true)
+            }
+           
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                self.state = self.state
-                    .change(path: \.isLoading, to: false)
-                    .change(path: \.data, to: .init(list: Array(0...100)))
-                    .change(path: \.isEmpty, to: false)
-                    
+                
+                withAnimation {
+                    self.state = self.state
+                        .change(path: \.isLoading, to: false)
+                        .change(path: \.data, to: .init(list: Array(0...100)))
+                        .change(path: \.isEmpty, to: false)
+                }
+                
+                
             }
             
         case .pushScreen:
@@ -100,6 +117,6 @@ extension CharactersViewModel {
 
 
 // MARK: - Api Calls
-extension CharactersViewModel {
+extension CharactersScreenView.ViewModel {
     
 }

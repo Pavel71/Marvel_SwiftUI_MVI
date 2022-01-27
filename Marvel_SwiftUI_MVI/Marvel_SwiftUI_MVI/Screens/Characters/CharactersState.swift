@@ -7,16 +7,16 @@
 
 import Foundation
 
-
-struct CharactersState: ViewStateable {
-
-    
-    var isLoading: Bool = false
-    var isEmpty: Bool = false
-    var data = CharactersModel()
-    
+extension CharactersScreenView {
+    struct ViewState: ViewStateable {
+        
+        
+        var isLoading: Bool = false
+        var isEmpty: Bool = false
+        var data = CharactersModel()
+        
+    }
 }
-
 
 
 

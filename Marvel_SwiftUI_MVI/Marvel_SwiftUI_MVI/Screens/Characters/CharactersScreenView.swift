@@ -11,7 +11,7 @@ import SDWebImageSwiftUI
 
 struct CharactersScreenView: View {
     
-    @ObservedObject var viewModel: CharactersViewModel
+    @ObservedObject var viewModel =  ViewModel()
     @StateObject var navigation =  Navigation(isRoot: true)
     
     
@@ -81,7 +81,6 @@ struct CharactersScreenView: View {
 
                 }
             }
-            
             .alert(item: $viewModel.alert) { alert in
                 Alert(title: Text(alert.title),
                       message: Text(alert.message))
@@ -98,7 +97,7 @@ private struct SearchBarView: View {
     
     @State private var query: String = ""
     
-    var typeAction: (CharacterAction) -> Void
+    var typeAction: (CharactersScreenView.ViewAction) -> Void
     
     var body: some View {
         VStack(spacing: 15) {
@@ -128,6 +127,6 @@ private struct SearchBarView: View {
 
 struct CharactersView_Previews: PreviewProvider {
     static var previews: some View {
-        CharactersScreenView(viewModel: CharactersViewModel())
+        CharactersScreenView(viewModel: CharactersScreenView.ViewModel())
     }
 }
